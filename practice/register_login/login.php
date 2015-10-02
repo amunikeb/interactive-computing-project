@@ -1,11 +1,5 @@
 <?php 
 	include 'core/init.php';
-	include 'includes/overall/header.php';
-	//if(user_exists('ybalgobin') === true){
-	//	echo 'exists';
-	//}
-	//die();
-	
 	if(empty ($_POST) === false){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
@@ -19,6 +13,11 @@
 		$errors[] = 'You have not activated your account';
 		
 	}else{
+            //error checking for the length of a password
+        if (strlen($password) > 32){
+            $errors[] = 'password too long';
+        }
+
 		$login = login($username, $password);
 		if($login === false){
 			$errors[] = 'That username/password combination is incorrect';
@@ -32,8 +31,11 @@
 		}
 		
 	}
-		print_r($errors);
-		//echo $username, '  ', $password;
+
 	}
-	include 'includes/overall/footer.php';
+
+include 'includes/overall/header.php';
+?>markup
+<?php
+include 'includes/overall/footer.php';
 ?>
